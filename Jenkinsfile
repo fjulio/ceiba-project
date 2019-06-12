@@ -37,7 +37,7 @@ pipeline{
 				parallel {
 					stage('Compile backend'){
 						steps{
-							echo "------------>Compilación backend<------------"
+							echo "------------>CompilaciÃ³n backend<------------"
 							dir("${PROJECT_PATH_BACK}"){
 								sh 'gradle build -x test'
 							}
@@ -62,7 +62,7 @@ pipeline{
 			
 			stage('Sonar Analysis'){
 				steps{
-					echo '------------>Analisis de código estático<------------'
+					echo '------------>Analisis de cÃ³digo estÃ¡tico<------------'
 					  withSonarQubeEnv('Sonar') {
                         sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=parqueadero.master -Dsonar.projectName=parqueadero.master -Dproject.settings=./sonar-project.properties"
                      }
@@ -74,7 +74,7 @@ pipeline{
 		}
 		post {
 			failure {
-				mail(to: 'jhon.realpe@ceiba.com.co',
+				mail(to: 'fabio.julio@ceiba.com.co',
 				body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
 				subject: "ERROR CI: ${env.JOB_NAME}")
 			}
