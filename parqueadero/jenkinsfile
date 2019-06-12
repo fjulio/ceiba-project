@@ -20,30 +20,18 @@ pipeline{
 		}
 		
 		environment {
-        PROJECT_PATH_BACK = 'parqueadero'
+        PROJECT_PATH_BACK = './'
 		}
-		parameters{
-			booleanParam defaultValue: false, description: 'Push a registry AWS', name: 'pushdeploy'
-		}
-		
+				
 		stages{
 		
 			stage('Checkout') {
 				steps {
                 echo '------------>Checkout desde Git parqueadero<------------'
-                checkout([$class: 'GitSCM', branches: [[name: '${BRANCH_NAME}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'Microservicio']], gitTool: 'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_fjulio', url: 'https://github.com/fjulio/ceiba-project']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'parqueadero']], gitTool: 'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId: '7fe28495-6f45-4577-8c7b-dce727e78f14', url: 'https://github.com/fjulio/ceiba-project.git']]])
 				}
 			}
 		
-		
-		
-			stage('Checkout-comun') {
-			steps {
-                echo '------------>Checkout desde Git Comun<------------'
-
-                checkout([$class: 'GitSCM', branches: [[name: 'master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'Comun']], gitTool: 'Git_Centos', submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_fjulio', url: 'https://github.com/fjulio/ceiba-project']]])
-				}
-			}
 		
 			stage('Compile'){
 				parallel {
@@ -76,7 +64,7 @@ pipeline{
 				steps{
 					echo '------------>Analisis de código estático<------------'
 					  withSonarQubeEnv('Sonar') {
-                        sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=.master -Dsonar.projectName=.master -Dproject.settings=./sonar-project.properties"
+                        sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=parqueadero.master -Dsonar.projectName=parqueadero.master -Dproject.settings=./sonar-project.properties"
                      }
 				}
 			}
@@ -86,7 +74,7 @@ pipeline{
 		}
 		post {
 			failure {
-				mail(to: 'fabio.julio@ceiba.com.co',
+				mail(to: 'jhon.realpe@ceiba.com.co',
 				body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
 				subject: "ERROR CI: ${env.JOB_NAME}")
 			}
