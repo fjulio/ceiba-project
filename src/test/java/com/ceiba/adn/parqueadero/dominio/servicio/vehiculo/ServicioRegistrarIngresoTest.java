@@ -20,7 +20,7 @@ public class ServicioRegistrarIngresoTest {
 	@Test
 	public void validarIngresoVehiculoConInicialPlacaA() {
 		
-		String mensajeNoPermitidoIngreso = "Las placas inicializadas con la letra A, solo tienen permitido el ingreso los días domingo y lunes";
+		String mensajeNoPermitidoIngreso = "Las placas inicializadas con la letra A, solo tienen permitido el ingreso los dias domingo y lunes";
 		int limite = 20;
 		
 		Calendar cal = Calendar.getInstance();
