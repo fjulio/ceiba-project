@@ -1,8 +1,7 @@
 package com.ceiba.adn.parqueadero.infraestructura.mapeo;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import org.assertj.core.util.Lists;
 
 import com.ceiba.adn.parqueadero.dominio.Vehiculo;
 import com.ceiba.adn.parqueadero.dominio.modelo.VehiculoDTO;
@@ -32,18 +31,18 @@ public class VehiculoMapeoImpl implements VehiculoMapeo {
 	public Vehiculo mapearDesdeEntidad(EntidadVehiculo entidadVehiculo) {
 		if (entidadVehiculo == null)
 			throw new ExcepcionVehiculoNoEncontrado(MENSAJE_VEHICULO_NO_ENCONTRADO);
-		
+
 		return new Vehiculo(entidadVehiculo.getId(), entidadVehiculo.getPlaca(), entidadVehiculo.getTipoVehiculo(),
-				entidadVehiculo.getCilindraje(), entidadVehiculo.getHoraIngreso(), entidadVehiculo.getHoraSalida(), entidadVehiculo.getEstado(),
-				entidadVehiculo.getPago());
+				entidadVehiculo.getCilindraje(), entidadVehiculo.getHoraIngreso(), entidadVehiculo.getHoraSalida(),
+				entidadVehiculo.getEstado(), entidadVehiculo.getPago());
 	}
 
 	@Override
 	public List<VehiculoDTO> mapearListaEntidad(List<EntidadVehiculo> listEntidadVehiculo) {
-		List<VehiculoDTO> lista = Lists.newArrayList();
-		listEntidadVehiculo.forEach(entidadVehiculo -> lista.add(new VehiculoDTO(entidadVehiculo.getPlaca(),entidadVehiculo.getCilindraje(), entidadVehiculo.getTipoVehiculo(),
-				 entidadVehiculo.getHoraIngreso(), entidadVehiculo.getHoraSalida(), entidadVehiculo.getEstado(),
-				entidadVehiculo.getPago())));
+		List<VehiculoDTO> lista = new ArrayList<>();
+		listEntidadVehiculo.forEach(entidadVehiculo -> lista.add(new VehiculoDTO(entidadVehiculo.getPlaca(),
+				entidadVehiculo.getCilindraje(), entidadVehiculo.getTipoVehiculo(), entidadVehiculo.getHoraIngreso(),
+				entidadVehiculo.getHoraSalida(), entidadVehiculo.getEstado(), entidadVehiculo.getPago())));
 		return lista;
 	}
 
