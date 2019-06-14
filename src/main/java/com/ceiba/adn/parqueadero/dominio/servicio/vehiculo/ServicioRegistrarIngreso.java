@@ -19,7 +19,7 @@ public class ServicioRegistrarIngreso {
     
     private static final String PLACA_LETRA_INICIAL_A = "A";
     
-    private static final String NO_PERMITE_INGRESO_PLACAS_A = "Las placas inicializadas con la letra A, solo tienen permitido el ingreso los días domingo y lunes";
+    private static final String NO_PERMITE_INGRESO_PLACAS_A = "Las placas inicializadas con la letra A, solo tienen permitido el ingreso los dias domingo y lunes";
     
 	private final ConsultaRepositorioVehiculo consultaRepositorioVehiculo;
 	

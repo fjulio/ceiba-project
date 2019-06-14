@@ -11,7 +11,7 @@ import com.ceiba.adn.parqueadero.infraestructura.excepcion.ExcepcionVehiculoNoEn
 
 public class VehiculoMapeoImpl implements VehiculoMapeo {
 
-	private static final String MENSAJE_VEHICULO_NO_ENCONTRADO = "El vehículo no se encuentra en el parqueadero";
+	private static final String MENSAJE_VEHICULO_NO_ENCONTRADO = "El vehiculo no se encuentra en el parqueadero";
 
 	private static final VehiculoMapeoImpl INSTANCIA = new VehiculoMapeoImpl();
 
