@@ -1,7 +1,8 @@
-package com.ceiba.adn.parqueadero.infraestructura.repositorio.impl;
+package com.ceiba.adn.parqueadero.infraestructura.consulta.adaptador;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ceiba.adn.parqueadero.dominio.Vehiculo;
@@ -17,6 +18,7 @@ public class RepositorioVehiculoImpl implements ConsultaRepositorioVehiculo{
 	
 	private final VehiculoMapeoImpl  vehiculoMapeoImpl = VehiculoMapeoImpl.getInstance();
 	
+	@Autowired
 	public RepositorioVehiculoImpl(RepositorioJPA repositorioJPA) {
 		this.repositorioJPA = repositorioJPA;
 	}
@@ -33,7 +35,7 @@ public class RepositorioVehiculoImpl implements ConsultaRepositorioVehiculo{
 
 	@Override
 	public Vehiculo existeIngreso(String placa) {
-		return repositorioJPA.existeIngreso(placa);
+		return this.vehiculoMapeoImpl.mapearDesdeEntidad(repositorioJPA.existeIngreso(placa));
 	}
 
 }

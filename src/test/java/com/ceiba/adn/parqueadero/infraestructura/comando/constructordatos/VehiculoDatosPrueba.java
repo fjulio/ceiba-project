@@ -1,4 +1,4 @@
-package com.ceiba.adn.parqueadero.dominio.comando.testdata;
+package com.ceiba.adn.parqueadero.infraestructura.comando.constructordatos;
 
 import java.util.Date;
 

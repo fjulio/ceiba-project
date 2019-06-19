@@ -7,6 +7,7 @@ import com.ceiba.adn.parqueadero.dominio.TipoVehiculo;
 import com.ceiba.adn.parqueadero.dominio.Vehiculo;
 import com.ceiba.adn.parqueadero.dominio.comando.repositorio.ComandoRepositorioVehiculo;
 import com.ceiba.adn.parqueadero.dominio.excepcion.ExcepcionNoPermiteIngreso;
+import com.ceiba.adn.parqueadero.dominio.excepcion.ExcepcionRegistrado;
 import com.ceiba.adn.parqueadero.dominio.repositorio.ConsultaRepositorioVehiculo;
 
 public class ServicioRegistrarIngreso {
@@ -18,6 +19,8 @@ public class ServicioRegistrarIngreso {
     private static final String NO_EXISTE_CUPO_DISPONIBLE = "El parqueadero no tiene cupo disponible para el tipo de vehiculo.";
     
     private static final String PLACA_LETRA_INICIAL_A = "A";
+    
+    private static final String VEHICULO_SE_ENCUENTRA_INGRESADO = "El vehiculo con las placas proporcionadas, se encuentra dentro del parqueadero";
     
     private static final String NO_PERMITE_INGRESO_PLACAS_A = "Las placas inicializadas con la letra A, solo tienen permitido el ingreso los dias domingo y lunes";
     
@@ -31,15 +34,15 @@ public class ServicioRegistrarIngreso {
 	}
 
 	public Long ejecutar(Vehiculo vehiculo) {
-		validarDisponibilidadPorTipoVehiculo(vehiculo.getTipoVehiculo());
 		validarDisponibilidadPorInicialPlaca(vehiculo.getPlaca(), vehiculo.getHoraIngreso());
-		return this.comandoRepositorioVehiculo.registrarIngreso(vehiculo).getId();
+		validarDisponibilidadPorTipoVehiculo(vehiculo.getTipoVehiculo());
+		return this.comandoRepositorioVehiculo.registrarIngresoSalidaVehiculo(vehiculo).getId();
 	}
 	
 	private void validarDisponibilidadPorTipoVehiculo(String tipoVehiculo) {
 		int cantidadVehiculos = this.consultaRepositorioVehiculo.obtenerVehiculosIngresados(tipoVehiculo);
-		if(tipoVehiculo.equalsIgnoreCase(TipoVehiculo.CARRO.name()) && cantidadVehiculos >= LIMITE_CARRO 
-				||  tipoVehiculo.equalsIgnoreCase(TipoVehiculo.MOTO.name()) && cantidadVehiculos >= LIMITE_MOTO )
+		if(tipoVehiculo.equalsIgnoreCase(TipoVehiculo.CARRO.tipo()) && cantidadVehiculos >= LIMITE_CARRO 
+				||  tipoVehiculo.equalsIgnoreCase(TipoVehiculo.MOTO.tipo()) && cantidadVehiculos >= LIMITE_MOTO )
 			throw new ExcepcionNoPermiteIngreso(NO_EXISTE_CUPO_DISPONIBLE);
 	}
 	

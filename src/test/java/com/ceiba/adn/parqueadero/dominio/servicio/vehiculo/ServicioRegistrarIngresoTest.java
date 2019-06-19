@@ -9,10 +9,12 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.ceiba.adn.PruebaBase;
+import com.ceiba.adn.parqueadero.dominio.TipoVehiculo;
 import com.ceiba.adn.parqueadero.dominio.Vehiculo;
 import com.ceiba.adn.parqueadero.dominio.comando.repositorio.ComandoRepositorioVehiculo;
 import com.ceiba.adn.parqueadero.dominio.comando.testdata.VehiculoDatosPrueba;
 import com.ceiba.adn.parqueadero.dominio.excepcion.ExcepcionNoPermiteIngreso;
+import com.ceiba.adn.parqueadero.dominio.excepcion.ExcepcionRegistrado;
 import com.ceiba.adn.parqueadero.dominio.repositorio.ConsultaRepositorioVehiculo;
 
 public class ServicioRegistrarIngresoTest {
@@ -33,17 +35,67 @@ public class ServicioRegistrarIngresoTest {
 		Vehiculo vehiculo = vehiculoDatosPrueba.construir();
 		
 		ConsultaRepositorioVehiculo consultaRepositorioVehiculo = Mockito.mock(ConsultaRepositorioVehiculo.class);
-		Mockito.when(consultaRepositorioVehiculo.obtenerVehiculosIngresados(Mockito.anyString())).thenReturn(limite);
-		
 		ComandoRepositorioVehiculo comandoRepositorioVehiculo = Mockito.mock(ComandoRepositorioVehiculo.class);
-		Mockito.when(comandoRepositorioVehiculo.registrarIngreso(vehiculo)).thenReturn(vehiculo);
+		
+		Mockito.when(consultaRepositorioVehiculo.existeIngreso(Mockito.anyString())).thenReturn(null);
+		Mockito.when(consultaRepositorioVehiculo.obtenerVehiculosIngresados(Mockito.anyString())).thenReturn(limite);
+		Mockito.when(comandoRepositorioVehiculo.registrarIngresoSalidaVehiculo(vehiculo)).thenReturn(vehiculo);
 	
 		ServicioRegistrarIngreso servicioRegistrarIngreso = new ServicioRegistrarIngreso(consultaRepositorioVehiculo, comandoRepositorioVehiculo);
 		
-		//PruebaBase.assertThrows(() -> servicioRegistrarIngreso.ejecutar(vehiculo), ExcepcionNoPermiteIngreso.class,
-				//mensajeNoPermitidoIngreso);
+		PruebaBase.assertThrows(() -> servicioRegistrarIngreso.ejecutar(vehiculo), ExcepcionNoPermiteIngreso.class,
+			mensajeNoPermitidoIngreso);
 		
 	}
+	
+	@Test
+	public void validarLimiteDeVehiculoTipoCarro() {
+		
+		String mensajeNoPermitidoIngreso = "El parqueadero no tiene cupo disponible para el tipo de vehiculo.";
+		int limite = 20;
+		
+		VehiculoDatosPrueba vehiculoDatosPrueba = new VehiculoDatosPrueba();
+		vehiculoDatosPrueba.placa("MJK895").tipoVehiculo(TipoVehiculo.CARRO.tipo());
+		Vehiculo vehiculo = vehiculoDatosPrueba.construir();
+		
+		ConsultaRepositorioVehiculo consultaRepositorioVehiculo = Mockito.mock(ConsultaRepositorioVehiculo.class);
+		ComandoRepositorioVehiculo comandoRepositorioVehiculo = Mockito.mock(ComandoRepositorioVehiculo.class);
+		
+		Mockito.when(consultaRepositorioVehiculo.existeIngreso(Mockito.anyString())).thenReturn(null);
+		Mockito.when(consultaRepositorioVehiculo.obtenerVehiculosIngresados(Mockito.anyString())).thenReturn(limite);
+		Mockito.when(comandoRepositorioVehiculo.registrarIngresoSalidaVehiculo(vehiculo)).thenReturn(vehiculo);
+	
+		ServicioRegistrarIngreso servicioRegistrarIngreso = new ServicioRegistrarIngreso(consultaRepositorioVehiculo, comandoRepositorioVehiculo);
+		
+		PruebaBase.assertThrows(() -> servicioRegistrarIngreso.ejecutar(vehiculo), ExcepcionNoPermiteIngreso.class,
+			mensajeNoPermitidoIngreso);
+		
+	}
+	
+	@Test
+	public void validarLimiteDeVehiculoTipoMoto() {
+		
+		String mensajeNoPermitidoIngreso = "El parqueadero no tiene cupo disponible para el tipo de vehiculo.";
+		int limite = 20;
+		
+		VehiculoDatosPrueba vehiculoDatosPrueba = new VehiculoDatosPrueba();
+		vehiculoDatosPrueba.placa("MJK895").tipoVehiculo(TipoVehiculo.MOTO.tipo());
+		Vehiculo vehiculo = vehiculoDatosPrueba.construir();
+		
+		ConsultaRepositorioVehiculo consultaRepositorioVehiculo = Mockito.mock(ConsultaRepositorioVehiculo.class);
+		ComandoRepositorioVehiculo comandoRepositorioVehiculo = Mockito.mock(ComandoRepositorioVehiculo.class);
+		
+		Mockito.when(consultaRepositorioVehiculo.existeIngreso(Mockito.anyString())).thenReturn(null);
+		Mockito.when(consultaRepositorioVehiculo.obtenerVehiculosIngresados(Mockito.anyString())).thenReturn(limite);
+		Mockito.when(comandoRepositorioVehiculo.registrarIngresoSalidaVehiculo(vehiculo)).thenReturn(vehiculo);
+	
+		ServicioRegistrarIngreso servicioRegistrarIngreso = new ServicioRegistrarIngreso(consultaRepositorioVehiculo, comandoRepositorioVehiculo);
+		
+		PruebaBase.assertThrows(() -> servicioRegistrarIngreso.ejecutar(vehiculo), ExcepcionNoPermiteIngreso.class,
+			mensajeNoPermitidoIngreso);
+		
+	}
+	
 	
 	@Test
 	public void insertar() {
@@ -53,10 +105,11 @@ public class ServicioRegistrarIngresoTest {
 		Vehiculo vehiculo = datosPrueba.construir();
 		
 		ConsultaRepositorioVehiculo consultaRepositorioVehiculo = Mockito.mock(ConsultaRepositorioVehiculo.class);
-		Mockito.when(consultaRepositorioVehiculo.obtenerVehiculosIngresados(Mockito.anyString())).thenReturn(limite);
-		
 		ComandoRepositorioVehiculo comandoRepositorioVehiculo = Mockito.mock(ComandoRepositorioVehiculo.class);
-		Mockito.when(comandoRepositorioVehiculo.registrarIngreso(vehiculo)).thenReturn(vehiculo);
+		
+		Mockito.when(consultaRepositorioVehiculo.existeIngreso(Mockito.anyString())).thenReturn(null);
+		Mockito.when(consultaRepositorioVehiculo.obtenerVehiculosIngresados(Mockito.anyString())).thenReturn(limite);
+		Mockito.when(comandoRepositorioVehiculo.registrarIngresoSalidaVehiculo(vehiculo)).thenReturn(vehiculo);
 	
 		ServicioRegistrarIngreso servicioRegistrarIngreso = new ServicioRegistrarIngreso(consultaRepositorioVehiculo, comandoRepositorioVehiculo);
 		

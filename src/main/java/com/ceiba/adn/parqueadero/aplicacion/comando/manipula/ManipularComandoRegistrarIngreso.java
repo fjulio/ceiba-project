@@ -1,5 +1,6 @@
 package com.ceiba.adn.parqueadero.aplicacion.comando.manipula;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ceiba.adn.parqueadero.aplicacion.comando.ComandoVehiculo;
@@ -12,13 +13,14 @@ import com.ceiba.adn.parqueadero.dominio.servicio.vehiculo.ServicioRegistrarIngr
 @Component
 public class ManipularComandoRegistrarIngreso
 		implements ComandoManipulaRespuesta<ComandoVehiculo, ComandoRespuesta<Long>> {
-
 	private ServicioRegistrarIngreso servicioRegistrarIngreso;
 
 	private FabricarIngresoVehiculo fabricarIngresoVehiculo;
 
-	public ManipularComandoRegistrarIngreso(ServicioRegistrarIngreso servicioRegistrarIngreso) {
+
+	public ManipularComandoRegistrarIngreso(ServicioRegistrarIngreso servicioRegistrarIngreso, FabricarIngresoVehiculo fabricarIngresoVehiculo ) {
 		this.servicioRegistrarIngreso = servicioRegistrarIngreso;
+		this.fabricarIngresoVehiculo = fabricarIngresoVehiculo;
 	}
 
 	@Override

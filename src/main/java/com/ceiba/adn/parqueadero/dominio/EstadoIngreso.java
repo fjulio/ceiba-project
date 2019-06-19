@@ -2,8 +2,8 @@ package com.ceiba.adn.parqueadero.dominio;
 
 public enum EstadoIngreso {
 
-	OCUPADO(2,"Ocupado"),
-	DISPONIBLE(1, "Disponible");
+	SALIDA(2,"salida"),
+	INGRESO(1, "ingreso");
 	
 	private int id;
 	private String estado;

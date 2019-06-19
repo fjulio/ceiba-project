@@ -25,7 +25,6 @@ public class EntidadVehiculo {
 	@Column(name = "tipo_vehiculo", nullable = false)
 	private String tipoVehiculo;
 
-	@Size(min = 2, max = 5)
 	@Column(name = "cilindraje")
 	private int cilindraje;
 
@@ -35,11 +34,9 @@ public class EntidadVehiculo {
 	@Column(name = "hora_salida")
 	private Date horaSalida;
 
-	@Size(min = 2, max = 5)
 	@Column(name = "estado")
 	private int estado;
 
-	@Size(min = 3, max = 10)
 	@Column(name = "pago")
 	private double pago;
 
