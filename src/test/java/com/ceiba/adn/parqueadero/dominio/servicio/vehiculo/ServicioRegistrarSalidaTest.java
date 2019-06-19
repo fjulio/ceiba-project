@@ -25,7 +25,7 @@ public class ServicioRegistrarSalidaTest {
 	@Test
 	public void testPagoVehiculoNoEncontrado() {
 
-		String mensaje = "El vehículo no ha ingresado al parqueadero";
+		String mensaje = "El vehiculo no ha ingresado al parqueadero";
 
 		VehiculoDatosPrueba vehiculoDatosPrueba = new VehiculoDatosPrueba();
 		Vehiculo vehiculo = vehiculoDatosPrueba.construir();

@@ -15,7 +15,7 @@ public class ServicioRegistrarSalida {
 
 	private final ComandoRepositorioVehiculo comandoRepositorioVehiculo;
 
-	private final static String VEHICULO_NO_INGRESADO = "El vehículo no ha ingresado al parqueadero";
+	private final static String VEHICULO_NO_INGRESADO = "El vehiculo no ha ingresado al parqueadero";
 
 	public ServicioRegistrarSalida(ConsultaRepositorioVehiculo repositorioConsultasVehiculo,
 			ComandoRepositorioVehiculo comandoRepositorioVehiculo) {
