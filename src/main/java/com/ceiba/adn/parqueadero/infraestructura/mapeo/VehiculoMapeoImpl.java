@@ -41,7 +41,7 @@ public class VehiculoMapeoImpl implements VehiculoMapeo {
 	public List<VehiculoDTO> mapearListaEntidad(List<EntidadVehiculo> listEntidadVehiculo) {
 		List<VehiculoDTO> lista = new ArrayList<>();
 		listEntidadVehiculo.forEach(entidadVehiculo -> lista.add(new VehiculoDTO(entidadVehiculo.getPlaca(),
-				entidadVehiculo.getCilindraje(), entidadVehiculo.getTipoVehiculo(), entidadVehiculo.getHoraIngreso(),
+				entidadVehiculo.getTipoVehiculo(),entidadVehiculo.getCilindraje(), entidadVehiculo.getHoraIngreso(),
 				entidadVehiculo.getHoraSalida(), entidadVehiculo.getEstado(), entidadVehiculo.getPago())));
 		return lista;
 	}

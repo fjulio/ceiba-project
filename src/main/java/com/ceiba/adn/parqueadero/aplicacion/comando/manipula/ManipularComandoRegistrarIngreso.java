@@ -1,6 +1,5 @@
 package com.ceiba.adn.parqueadero.aplicacion.comando.manipula;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ceiba.adn.parqueadero.aplicacion.comando.ComandoVehiculo;

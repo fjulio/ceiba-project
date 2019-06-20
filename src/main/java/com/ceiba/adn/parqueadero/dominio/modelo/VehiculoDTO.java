@@ -6,13 +6,13 @@ public class VehiculoDTO {
 
 	private String placa;
 	
-	private int cilindraje;
-	
 	private String tipoVehiculo;
 	
-	private Date fechaIngreso;
+	private int cilindraje;
 	
-	private Date fechaSalida;
+	private Date horaIngreso;
+	
+	private Date horaSalida;
 	
 	private int estado;
 	
@@ -26,14 +26,6 @@ public class VehiculoDTO {
 		this.placa = placa;
 	}
 
-	public int getCilindraje() {
-		return cilindraje;
-	}
-
-	public void setCilindraje(int cilindraje) {
-		this.cilindraje = cilindraje;
-	}
-
 	public String getTipoVehiculo() {
 		return tipoVehiculo;
 	}
@@ -42,20 +34,28 @@ public class VehiculoDTO {
 		this.tipoVehiculo = tipoVehiculo;
 	}
 
-	public Date getFechaIngreso() {
-		return fechaIngreso;
+	public int getCilindraje() {
+		return cilindraje;
 	}
 
-	public void setFechaIngreso(Date fechaIngreso) {
-		this.fechaIngreso = fechaIngreso;
+	public void setCilindraje(int cilindraje) {
+		this.cilindraje = cilindraje;
 	}
 
-	public Date getFechaSalida() {
-		return fechaSalida;
+	public Date getHoraIngreso() {
+		return horaIngreso;
 	}
 
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
+	public void setHoraIngreso(Date horaIngreso) {
+		this.horaIngreso = horaIngreso;
+	}
+
+	public Date getHoraSalida() {
+		return horaSalida;
+	}
+
+	public void setHoraSalida(Date horaSalida) {
+		this.horaSalida = horaSalida;
 	}
 
 	public int getEstado() {
@@ -74,16 +74,22 @@ public class VehiculoDTO {
 		this.pago = pago;
 	}
 
-	public VehiculoDTO(String placa, int cilindraje, String tipoVehiculo, Date fechaIngreso, Date fechaSalida,
-			int estado, double pago) {
+	public VehiculoDTO() {
+		super();
+	}
+
+	public VehiculoDTO(String placa, String tipoVehiculo, int cilindraje, Date horaIngreso, Date horaSalida, int estado,
+			double pago) {
 		super();
 		this.placa = placa;
-		this.cilindraje = cilindraje;
 		this.tipoVehiculo = tipoVehiculo;
-		this.fechaIngreso = fechaIngreso;
-		this.fechaSalida = fechaSalida;
+		this.cilindraje = cilindraje;
+		this.horaIngreso = horaIngreso;
+		this.horaSalida = horaSalida;
 		this.estado = estado;
 		this.pago = pago;
 	}
+	
+
 	
 }

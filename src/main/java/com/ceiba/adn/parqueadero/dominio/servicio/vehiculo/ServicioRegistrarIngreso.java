@@ -34,6 +34,7 @@ public class ServicioRegistrarIngreso {
 	}
 
 	public Long ejecutar(Vehiculo vehiculo) {
+		vehiculo.setHoraIngreso(new Date());
 		validarDisponibilidadPorInicialPlaca(vehiculo.getPlaca(), vehiculo.getHoraIngreso());
 		validarDisponibilidadPorTipoVehiculo(vehiculo.getTipoVehiculo());
 		return this.comandoRepositorioVehiculo.registrarIngresoSalidaVehiculo(vehiculo).getId();

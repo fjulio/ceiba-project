@@ -13,6 +13,7 @@ import com.ceiba.adn.parqueadero.infraestructura.entidad.EntidadVehiculo;
 @Repository
 public interface RepositorioJPA extends CrudRepository<EntidadVehiculo, Long> {
 
+	@Query("select v from EntidadVehiculo v where v.estado = 1")
 	List<EntidadVehiculo> findAll();
 
 	@Query("select count(*) from EntidadVehiculo v where v.tipoVehiculo = :tipoVehiculo and v.estado = 1")

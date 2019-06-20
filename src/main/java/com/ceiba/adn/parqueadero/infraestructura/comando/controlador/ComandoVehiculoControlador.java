@@ -17,10 +17,11 @@ import com.ceiba.adn.parqueadero.comun.aplicacion.ComandoRespuesta;
 @RestControllerAdvice
 @RestController
 @RequestMapping("/vehiculo")
-@CrossOrigin("*")public class ComandoVehiculoControlador{
+@CrossOrigin("*")
+public class ComandoVehiculoControlador {
 
 	private ManipularComandoRegistrarIngreso comandoRegistrarIngreso;
-	
+
 	private ManipularComandoRegistrarSalida comandoRegistrarSalida;
 
 	@Autowired
@@ -29,16 +30,14 @@ import com.ceiba.adn.parqueadero.comun.aplicacion.ComandoRespuesta;
 		this.comandoRegistrarIngreso = comandoRegistrarIngreso;
 		this.comandoRegistrarSalida = comandoRegistrarSalida;
 	}
-	
-	
-	
+
 	@PostMapping
-	public ComandoRespuesta<Long> registrarIngreso(@RequestBody ComandoVehiculo comandoVehiculo){
+	public ComandoRespuesta<Long> registrarIngreso(@RequestBody ComandoVehiculo comandoVehiculo) {
 		return comandoRegistrarIngreso.ejecutar(comandoVehiculo);
 	}
-	
+
 	@PutMapping
-	public ComandoRespuesta<ComandoVehiculo> registrarSalida(@RequestBody ComandoVehiculo comandoVehiculo){
+	public ComandoRespuesta<ComandoVehiculo> registrarSalida(@RequestBody ComandoVehiculo comandoVehiculo) {
 		return comandoRegistrarSalida.ejecutar(comandoVehiculo);
 	}
 }
